@@ -57,5 +57,4 @@ jobs:
         commitChange: 'true'
         branch: deployment
         updateFile: 'true'
-        token: $GH_TOKEN
-        message: 'Update Image Version to $CONTAINER_IMAGE' 
+        message: 'Update Image Version to $CONTAINER_IMAGE'
