@@ -53,6 +53,6 @@ jobs:
         valueFile: 'deployment.yaml'
         propertyPath: 'spec.template.spec.containers[0].image'
         value: flask_test:${{ github.sha }}
-        commitChange: 'false'
+        commitChange: 'true'
         updateFile: 'true'
         message: 'Update Image Version to $CONTAINER_IMAGE' 
