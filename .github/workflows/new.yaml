@@ -47,10 +47,9 @@ jobs:
         # Push image to AWS ECR
         docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$CONTAINER_IMAGE
 
-    - uses: actions/checkout@v2
-    - name: Update Image Version in deployment.yaml
+    - name: Update Image Version in deployment manifest
       #if: github.ref == 'refs/heads/main'
-      uses: fjogeleit/yaml-update-action@main
+      uses: fjogeleit/yaml-update-action@master
       with:
         # valueFile: 'manifests/deployment.yaml'
         # propertyPath: 'spec.template.spec.containers.0.image'
