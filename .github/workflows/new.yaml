@@ -54,7 +54,7 @@ jobs:
         valueFile: 'manifests/deployment.yaml'
         propertyPath: 'spec.template.spec.containers.0.image'
         repository: mainakmb/gitops-argocd
-        updateFile: 'true'
+        updateFile: true
         value: '$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$CONTAINER_IMAGE'
         commitChange: 'false'
         branch: 'deployment'
