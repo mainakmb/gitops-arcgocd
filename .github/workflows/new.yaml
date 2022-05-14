@@ -41,18 +41,18 @@ jobs:
           -t $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$CONTAINER_IMAGE ./app
 
     - name: Push
-      if: github.ref == 'refs/heads/main'
+      #if: github.ref == 'refs/heads/main'
       run: |
         # Push image to AWS ECR
         docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$CONTAINER_IMAGE
 
     - name: Update Image Version in deployment.yaml
-      if: github.ref == 'refs/heads/main'
+      #if: github.ref == 'refs/heads/main'
       uses: fjogeleit/yaml-update-action@main
       with:
         valueFile: 'deployment.yaml'
-        propertyPath: 'spec.template.spec.containers[0:].image'
+        propertyPath: 'spec.template.spec.containers[0].image'
         value: flask_test:${{ github.sha }}
         commitChange: 'false'
         updateFile: 'true'
-        message: 'Update Image Version to ${{ steps.image.outputs.version }}' 
+        message: 'Update Image Version to $CONTAINER_IMAGE' 
