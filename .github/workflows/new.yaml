@@ -68,7 +68,7 @@ jobs:
       env:
         API_TOKEN_GITHUB: ${{ secrets.GH_TOKEN }}
       with:
-        source_file: 'manifests/deployment.yaml'
+        source_file: 'manifests/*'
         destination_repo: 'mainakmb/ArgoCD_manifests'
         destination_folder: 'manifests'
         user_email: 'mainakbiswasmb@gmail.com'
