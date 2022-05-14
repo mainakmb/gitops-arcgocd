@@ -47,22 +47,26 @@ jobs:
         # Push image to AWS ECR
         docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$CONTAINER_IMAGE
 
-    - name: Update Image Version in deployment manifest
-      #if: github.ref == 'refs/heads/main'
-      uses: fjogeleit/yaml-update-action@master
-      with:
-        valueFile: 'manifests/deployment.yaml'
-        propertyPath: 'spec.template.spec.containers.0.image'
-        repository: mainakmb/gitops-argocd
-        updateFile: 'true'
-        value: flask_test:${{ github.run_number }}
-        commitChange: 'true'
-        branch: deployment
-        targetBranch: dev
-        masterBranchName: dev
-        createPR: 'false'
-        message: 'Update Image Version to flask_test:${{ github.run_number }}'
-        token: ${{ secrets.GH_TOKEN }}
+    - name: Replace image Version
+      run: |
+        cat ./manifests/deployment.yaml | sed -i 's+840448912054.dkr.ecr.us-east-1.amazonaws.com/flask_test:*+840448912054.dkr.ecr.us-east-1.amazonaws.com/flask_test:${{ github.run_number }}+g' > ./manifests/deployment.yaml
+        cat ./manifests/deployment.yaml
+
+    # - name: Update Image Version in deployment manifest
+    #   #if: github.ref == 'refs/heads/main'
+    #   uses: fjogeleit/yaml-update-action@master
+    #   with:
+    #     valueFile: 'manifests/deployment.yaml'
+    #     propertyPath: 'spec.template.spec.containers.0.image'
+    #     repository: mainakmb/gitops-argocd
+    #     updateFile: 'true'
+    #     value: flask_test:${{ github.run_number }}
+    #     commitChange: 'true'
+    #     branch: deployment
+    #     masterBranchName: dev
+    #     createPR: 'false'
+    #     message: 'Update Image Version to flask_test:${{ github.run_number }}'
+    #     token: ${{ secrets.GH_TOKEN }}
 
         # valueFile: 'manifests/deployment.yaml'
         # propertyPath: 'spec.template.spec.containers.0.image'
