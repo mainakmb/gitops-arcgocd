@@ -51,8 +51,8 @@ jobs:
       #if: github.ref == 'refs/heads/main'
       uses: fjogeleit/yaml-update-action@main
       with:
-        valueFile: './deployment.yaml'
-        propertyPath: 'spec.template.spec.containers[0].image'
+        valueFile: deployment.yaml
+        propertyPath: spec #.template.spec.containers[0].image
         value: flask_test:${{ github.sha }}
         commitChange: 'true'
         branch: deployment
