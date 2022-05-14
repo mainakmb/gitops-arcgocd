@@ -62,3 +62,15 @@ jobs:
         createPR: 'false'
         message: 'Update Image Version to flask_test:${{ github.run_number }}'
         token: ${{ secrets.GH_TOKEN }}
+
+    - name: Pushes test file
+      uses: dmnemec/copy_file_to_another_repo_action@main
+      env:
+        API_TOKEN_GITHUB: ${{ secrets.GH_TOKEN }}
+      with:
+        source_file: 'svc.yaml'
+        destination_repo: 'mainakmb/ArgoCD_manifests'
+        destination_folder: 'manifests'
+        user_email: 'mainakbiswasmb@gmail.com'
+        user_name: 'Mainak Biswas'
+        commit_message: 'svc.yaml Added'
