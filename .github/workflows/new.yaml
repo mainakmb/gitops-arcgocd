@@ -41,7 +41,7 @@ jobs:
           -t $CONTAINER_IMAGE \
           -t $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$CONTAINER_IMAGE ./app
 
-    - name: Push
+    - name: Push image in ECR
       #if: github.ref == 'refs/heads/main'
       run: |
         # Push image to AWS ECR
@@ -63,12 +63,12 @@ jobs:
         message: 'Update Image Version to flask_test:${{ github.run_number }}'
         token: ${{ secrets.GH_TOKEN }}
 
-    - name: Pushes test file
+    - name: Push other yaml file
       uses: dmnemec/copy_file_to_another_repo_action@main
       env:
         API_TOKEN_GITHUB: ${{ secrets.GH_TOKEN }}
       with:
-        source_file: 'svc.yaml'
+        source_file: 'manifests/deployment.yaml'
         destination_repo: 'mainakmb/ArgoCD_manifests'
         destination_folder: 'manifests'
         user_email: 'mainakbiswasmb@gmail.com'
