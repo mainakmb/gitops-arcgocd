@@ -49,7 +49,7 @@ jobs:
 
     - name: Replace image Version
       run: |
-        cat ./manifests/deployment.yaml | sed -i 's+840448912054.dkr.ecr.us-east-1.amazonaws.com/flask_test:*+840448912054.dkr.ecr.us-east-1.amazonaws.com/flask_test:${{ github.run_number }}+g' > ./manifests/deployment.yaml
+        sed -i 's+$AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/flask_test:*+$AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/flask_test:${{ github.run_number }}+g' ./manifests/deployment.yaml
         cat ./manifests/deployment.yaml
 
     # - name: Update Image Version in deployment manifest
