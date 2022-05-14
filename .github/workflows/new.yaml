@@ -13,6 +13,7 @@ env:
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRETE_ID }}
   IMAGE_REPOSITORY_NAME: flask_test
   CONTAINER_IMAGE: flask_test:${{ github.sha }}
+  GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
 jobs:
   build-and-push:
@@ -50,9 +51,11 @@ jobs:
       #if: github.ref == 'refs/heads/main'
       uses: fjogeleit/yaml-update-action@main
       with:
-        valueFile: 'deployment.yaml'
+        valueFile: './deployment.yaml'
         propertyPath: 'spec.template.spec.containers[0].image'
         value: flask_test:${{ github.sha }}
         commitChange: 'true'
+        branch: deployment
         updateFile: 'true'
+        token: $GH_TOKEN
         message: 'Update Image Version to $CONTAINER_IMAGE' 
