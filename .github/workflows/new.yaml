@@ -62,15 +62,23 @@ jobs:
         # createPR: 'false'
         # message: 'Update Image Version to flask_test:${{ github.run_number }}'
         # token: ${{ secrets.GH_TOKEN }}
+
+        # valueFile: 'manifests/deployment.yaml'
+        # propertyPath: 'spec.template.spec.containers.0.image'
+        # value: 'flask_test:${{ github.run_number }}'
+        # repository: mainakmb/gitops-manifests
+        # branch: deployment/flask_test
+        # targetBranch: deployment/flask_test
+        # updateFile: true
+        # createPR: false
+        # commitChange: true
+        # message: 'Update Image Version to flask_test:${{ github.run_number }}'
+        # token: ${{ secrets.TOKEN_GITHUB }}
+
         valueFile: 'manifests/deployment.yaml'
         propertyPath: 'spec.template.spec.containers.0.image'
         value: 'flask_test:${{ github.run_number }}'
-        repository: mainakmb/gitops-manifests
-        branch: deployment/flask_test
-        targetBranch: deployment/flask_test
+        commitChange: false
         updateFile: true
-        createPR: false
-        commitChange: true
-        message: 'Update Image Version to flask_test:${{ github.run_number }}'
-        token: ${{ secrets.TOKEN_GITHUB }}
+
 
