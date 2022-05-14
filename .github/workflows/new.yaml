@@ -51,7 +51,7 @@ jobs:
       #if: github.ref == 'refs/heads/main'
       uses: fjogeleit/yaml-update-action@main
       with:
-        valueFile: 'deployment.yaml'
+        valueFile: 'manifests/deployment.yaml'
         propertyPath: 'spec.template.spec.containers.0.image'
         repository: mainakmb/gitops-argocd
         value: flask_test:${{ github.run_number }}
