@@ -74,7 +74,7 @@ jobs:
         createPR: false
         commitChange: true
         message: 'Update Image Version to flask_test:${{ github.run_number }}'
-        # token: ${{ secrets.GH_TOKEN }}
+        token: ${{ secrets.GH_TOKEN }}
 
         # valueFile: './manifests/deployment.yaml'
         # propertyPath: 'spec.template.spec.containers.0.image'
