@@ -12,7 +12,7 @@ env:
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRETE_ID }}
   IMAGE_REPOSITORY_NAME: flask_test
-  CONTAINER_IMAGE: flask_test:${{ github.sha }}
+  CONTAINER_IMAGE: flask_test:${{ github.run_number }}
   GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
 jobs:
@@ -52,7 +52,7 @@ jobs:
       uses: fjogeleit/yaml-update-action@main
       with:
         valueFile: deployment.yaml
-        propertyPath: spec.template.spec.containers.[0].image
+        propertyPath: spec.template.spec.containers[0].image
         repository: mainakmb/gitops-argocd
         value: flask_test:${{ github.sha }}
         commitChange: 'true'
