@@ -52,7 +52,7 @@ jobs:
       uses: fjogeleit/yaml-update-action@main
       with:
         valueFile: 'manifests/deployment.yaml'
-        propertyPath: 'spec.template.spec.containers.[0].image'
+        propertyPath: 'spec.template'
         repository: mainakmb/gitops-argocd
         value: flask_test:${{ github.run_number }}
         commitChange: 'true'
