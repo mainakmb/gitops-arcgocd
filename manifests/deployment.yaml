@@ -17,6 +17,8 @@ spec:
       labels:
         app: flaskapp
     spec:
+      imagePullSecrets:
+      - name: regcred
       containers:
       - image: 840448912054.dkr.ecr.us-east-1.amazonaws.com/flask_test:latest
         name: flaskapp
