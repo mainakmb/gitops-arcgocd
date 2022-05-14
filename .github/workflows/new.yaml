@@ -54,11 +54,12 @@ jobs:
         valueFile: 'manifests/deployment.yaml'
         propertyPath: 'spec.template'
         repository: mainakmb/gitops-argocd
-        value: flask_test:${{ github.run_number }}
-        commitChange: 'true'
-        branch: deployment
-        # masterBranchName: dev
         updateFile: 'true'
+        value: flask_test:${{ github.run_number }}
+        commitChange: 'false'
+        branch: deployment/flask_test:${{ github.run_number }}
+        targetBranch: main
+        createPR: 'false'
         message: 'Update Image Version to flask_test:${{ github.run_number }}'
         token: ${{ secrets.GH_TOKEN }}
 
