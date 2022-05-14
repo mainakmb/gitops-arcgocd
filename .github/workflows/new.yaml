@@ -68,8 +68,8 @@ jobs:
         propertyPath: 'spec.template.spec.containers.0.image'
         value: 'flask_test:${{ github.run_number }}'
         repository: mainakmb/gitops-argocd
-        branch: deployment
-        targetBranch: deployment
+        branch: dev
+        targetBranch: dev
         updateFile: true
         createPR: false
         commitChange: true
