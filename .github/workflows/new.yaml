@@ -49,9 +49,23 @@ jobs:
 
     - name: Replace image Version
       run: |
-        sed -i 's+$AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/flask_test:*+$AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/flask_test:${{ github.run_number }}+g' ./manifests/deployment.yaml
+        sed -i 's+$AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/flask_test*+$AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/flask_test:${{ github.run_number }}+g' ./manifests/deployment.yaml
         cat ./manifests/deployment.yaml
 
+    - name: Modifiy the specific files using action
+      uses: action-owner/action-repo@ref
+# If you execute an action to modify the files, use the 'uses' key.
+# Just like as the previous step that executes the checkout action.
+# More details, see "https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsuses"
+
+    - name: Commit and push changes
+      run: |
+        git config --global user.name "Mainak Biswas"
+        git config --global user.email "mainakbiswasmb@gmail.com"
+
+        git add -A
+        git commit -am 'Update Image Version to flask_test:${{ github.run_number }}'
+        git push
     # - name: Update Image Version in deployment manifest
     #   #if: github.ref == 'refs/heads/main'
     #   uses: fjogeleit/yaml-update-action@master
