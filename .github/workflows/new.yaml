@@ -56,7 +56,7 @@ jobs:
         repository: mainakmb/gitops-argocd
         updateFile: 'true'
         value: '$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$CONTAINER_IMAGE'
-        commitChange: 'true'
+        commitChange: 'false'
         branch: 'deployment'
         masterBranchName: 'dev'
         createPR: 'false'
